@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import ShowTodos from './ShowTodos'
 import TodoForm from './TodoForm'
 
+// LocalStorage
 const getLocalStorage = () => {
     let data = localStorage.getItem('Tasks')
     if(data){
@@ -29,7 +30,6 @@ const Main = () => {
             text: text
         }
         setData([...data, newItem])
-        console.log(data)
         setId(Math.floor(Math.random() * 10000))
         setText('')
         setIsEditing(false)
@@ -39,11 +39,12 @@ const Main = () => {
         localStorage.setItem('Tasks', JSON.stringify(data))
     }, [data])
 
-
+    // Delete
     const deleteItem = (id) => {
         setData(data.filter(value => value.id != id))
     }
 
+    // Modify
     const modifyItem = (id) => {
         const selectedItem = data.find(value => value.id == id)
         setData(data.filter(value => value.id != id))
